@@ -24,7 +24,10 @@
 </head>
 <body ng-controller="seriesCtrl">
   <header>
-    <h1>Séries TV préférées de Vince</h1>
+    <h1>
+      Séries TV préférées de {{data.user}} 
+      <span class="label label-default">{{data.series.length}}</span>
+    </h1>
   </header>
   <div class="panel">
     <div class="input-group">
@@ -43,7 +46,12 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Les données ont pour l'instant disparu du code HTML. -->
+        <tr ng-repeat="series in data.series">
+          <td>{{series.title}}</td>
+          <td>{{series.season}}</td>
+          <td>{{series.ep}}</td>
+          <td>{{series.watched}}</td>
+        </tr>
       </tbody>
     </table>
   </div>
