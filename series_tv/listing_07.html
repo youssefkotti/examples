@@ -21,12 +21,23 @@
 
     myApp.controller('seriesCtrl', function($scope) {
       $scope.data = model;
+
+      $scope.freshEpisodesCount = function () {
+        var count = 0;
+        angular.forEach($scope.data.series, function (series) {
+          if (!episode.watched) { count++ }
+        });
+        return count;
+      }
     })
   </script>
 </head>
 <body ng-controller="seriesCtrl">
   <header>
-    <h1>Séries TV préférées de Vince</h1>
+    <h1>
+      Séries TV préférées de {{data.user}} 
+      <span class="label label-default">{{data.series.length}}</span>
+    </h1>
   </header>
   <div class="panel">
     <div class="input-group">
@@ -42,10 +53,17 @@
           <th>Saison</th>
           <th>Épisode</th>
           <th>Vu</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        <!-- Les données ont pour l'instant disparu du code HTML. -->
+        <tr ng-repeat="episode in data.episodes">
+          <td>{{episode.title}}</td>
+          <td>{{episode.season}}</td>
+          <td>{{episode.ep}}</td>
+          <td>{{episode.watched}}</td>
+          <td><input type="checkbox" ng-model="episode.watched" /></td>
+        </tr>
       </tbody>
     </table>
   </div>
