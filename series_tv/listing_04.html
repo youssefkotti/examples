@@ -16,9 +16,13 @@
               { title: "House of Cards", season: 2, ep: 10, watched: true },
               { title: "Sous le soleil", season: 1, ep: 1, watched: false }]
     };
+
+    myApp.controller('seriesCtrl', function($scope) {
+      $scope.data = model;
+    })
   </script>
 </head>
-<body>
+<body ng-controller="seriesCtrl">
   <header>
     <h1>Séries TV préférées de Vince</h1>
   </header>
