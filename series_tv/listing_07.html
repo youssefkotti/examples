@@ -24,7 +24,7 @@
 
       $scope.freshEpisodesCount = function () {
         var count = 0;
-        angular.forEach($scope.data.series, function (series) {
+        angular.forEach($scope.data.episodes, function (episode) {
           if (!episode.watched) { count++ }
         });
         return count;
@@ -36,7 +36,9 @@
   <header>
     <h1>
       Séries TV préférées de {{data.user}} 
-      <span class="label label-default">{{data.series.length}}</span>
+      <span class="label label-default" ng-hide="freshEpisodesCount() == 0">
+        {{freshEpisodesCount()}}
+      </span>
     </h1>
   </header>
   <div class="panel">
@@ -58,7 +60,7 @@
       </thead>
       <tbody>
         <tr ng-repeat="episode in data.episodes">
-          <td>{{episode.title}}</td>
+          <td>{{episode.series}}</td>
           <td>{{episode.season}}</td>
           <td>{{episode.ep}}</td>
           <td>{{episode.watched}}</td>
