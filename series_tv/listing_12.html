@@ -53,10 +53,10 @@
     });
 
     myApp.filter('episodeVus', function () {
-      return function (episodes, afficheEpVus) {
+      return function (episodes, afficheVus) {
         var resultArr = [];
         angular.forEach(episodes, function (episode) {
-          if (episode.watched == false || afficheEpVus == true) {
+          if (episode.watched == false || afficheVus == true) {
             resultArr.push(episode);
           }
         });
@@ -100,7 +100,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="episode in data.episodes | episodeVus:afficheEpVus | orderBy:'series'">
+        <tr ng-repeat="episode in data.episodes | episodeVus:afficheVus | orderBy:'series'">
           <td>{{episode.series}}</td>
           <td>{{episode.season}}</td>
           <td>{{episode.ep}}</td>
@@ -111,7 +111,7 @@
     </table>
 
     <div class="checkbox-inline">
-      <label><input type="checkbox" ng-model="afficheEpVus"> Affiche épisodes vus</label>
+      <label><input type="checkbox" ng-model="afficheVus"> Affiche épisodes vus</label>
     </div>
   </div>
 </body>
