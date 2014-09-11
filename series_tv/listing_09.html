@@ -5,6 +5,9 @@
   <title>Séries TV préférées de Vince</title>
   <link href="css/bootstrap.css" rel="stylesheet" />
   <link href="css/bootstrap-theme.css" rel="stylesheet" />
+  <style>
+  
+  </style>
   <script src="js/angular.js"></script>
   <script>
     var myApp = angular.module("myApp", []);
@@ -54,12 +57,20 @@
     </h1>
   </header>
   <div class="panel">
-    <div class="input-group">
-      <input class="form-control" />
-      <span class="input-group-btn">
+    <form class="form-inline" role="form">
+      <div class="form-group">
+        <input type="text" size="30" placeholder="Série" class="form-control" ng-model="seriesTitle" />
+      </div>
+      <div class="form-group">
+        <input type="text" size="10" placeholder="Saison" class="form-control" ng-model="seasonNum" />
+      </div>
+      <div class="form-group">
+        <input type="text" size="10" placeholder="Épisode" class="form-control" ng-model="episodeNum" />
+      </div>
+      <div class="form-group">
         <button class="btn btn-default">Ajouter</button>
-      </span>
-    </div>
+      </div>
+    </form>
     <table class="table table-striped">
       <thead>
         <tr>
