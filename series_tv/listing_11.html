@@ -53,6 +53,18 @@
           watched: false
         });
       }
+
+      myApp.filter('episodeVus', function () {
+        return function (episodes, afficheEpVus) {
+          var resultArr = [];
+          angular.forEach(episodes, function (episode) {
+            if (episode.watched == false || afficheEpVus == true) {
+              resultArr.push(episode);
+            }
+          });
+          return resultArr;
+        }
+      });
     });
   </script>
 </head>
