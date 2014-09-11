@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Séries TV préférées de Vince</title>
+  <link href="css/bootstrap.css" rel="stylesheet" />
+  <link href="css/bootstrap-theme.css" rel="stylesheet" />
+  <style>
+  
+  </style>
+  <script src="js/angular.js"></script>
+  <script>
+    var myApp = angular.module("myApp", []);
+
+    var model = {
+      user: "Vince",
+      episodes: [
+        { series: "The Good Wife", season: 6, ep: 1, watched: false },
+        { series: "Äkta människor", season: 3, ep: 12, watched: true },
+        { series: "House of Cards", season: 2, ep: 10, watched: true },
+        { series: "Sous le soleil", season: 1, ep: 1, watched: false }
+      ]
+    };
+
+    myApp.controller('seriesCtrl', function($scope) {
+      $scope.data = model;
+
+      $scope.episodesRestants = function () {
+        var count = 0;
+        angular.forEach($scope.data.episodes, function (episode) {
+          if (!episode.watched) { count++ }
+        });
+        return count;
+      }
+
+      $scope.bientotFini = function () {
+        if ($scope.episodesRestants() >= 5) {
+          return 'label-success';
+        }
+        else if ($scope.episodesRestants() < 5 && $scope.episodesRestants() >= 3) {
+          return 'label-warning';
+        }
+        else {
+          return 'label-danger';
+        }
+      }
+
+      $scope.addNewEpisode = function (seriesTitle, seasonNum, episodeNum) {
+        $scope.data.episodes.push({
+          series: seriesTitle,
+          season: seasonNum,
+          ep: episodeNum,
+          watched: false
+        });
+      }
+    });
+  </script>
+</head>
+<body ng-controller="seriesCtrl">
+  <header>
+    <h1>
+      Séries TV préférées de {{data.user}} 
+      <span class="label label-default" ng-class="bientotFini()" ng-hide="episodesRestants() == 0">
+        {{episodesRestants()}}
+      </span>
+    </h1>
+  </header>
+  <div class="panel">
+    <form class="form-inline" role="form">
+      <div class="form-group">
+        <input type="text" size="30" placeholder="Série" class="form-control" ng-model="seriesTitle" />
+      </div>
+      <div class="form-group">
+        <input type="text" size="10" placeholder="Saison" class="form-control" ng-model="seasonNum" />
+      </div>
+      <div class="form-group">
+        <input type="text" size="10" placeholder="Épisode" class="form-control" ng-model="episodeNum" />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-default" ng-click="addNewEpisode(seriesTitle, seasonNum, episodeNum)">Ajouter</button>
+      </div>
+    </form>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Série</th>
+          <th>Saison</th>
+          <th>Épisode</th>
+          <th>Vu</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="episode in data.episodes | filter:{watched: false} | orderBy:'series'">
+          <td>{{episode.series}}</td>
+          <td>{{episode.season}}</td>
+          <td>{{episode.ep}}</td>
+          <td>{{episode.watched }}</td>
+          <td><input type="checkbox" ng-model="episode.watched" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
