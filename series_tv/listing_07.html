@@ -22,7 +22,7 @@
     myApp.controller('seriesCtrl', function($scope) {
       $scope.data = model;
 
-      $scope.freshEpisodesCount = function () {
+      $scope.episodesRestants = function () {
         var count = 0;
         angular.forEach($scope.data.episodes, function (episode) {
           if (!episode.watched) { count++ }
@@ -36,8 +36,8 @@
   <header>
     <h1>
       Séries TV préférées de {{data.user}} 
-      <span class="label label-default" ng-hide="freshEpisodesCount() == 0">
-        {{freshEpisodesCount()}}
+      <span class="label label-default" ng-hide="episodesRestants() == 0">
+        {{episodesRestants()}}
       </span>
     </h1>
   </header>

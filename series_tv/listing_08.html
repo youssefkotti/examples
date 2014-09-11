@@ -23,7 +23,7 @@
     myApp.controller('seriesCtrl', function($scope) {
       $scope.data = model;
 
-      $scope.freshEpisodesCount = function () {
+      $scope.episodesRestants = function () {
         var count = 0;
         angular.forEach($scope.data.episodes, function (episode) {
           if (!episode.watched) { count++ }
@@ -32,10 +32,10 @@
       }
 
       $scope.bientotFini = function () {
-        if ($scope.freshEpisodesCount() >= 5) {
+        if ($scope.episodesRestants() >= 5) {
           return 'label-success';
         }
-        else if ($scope.freshEpisodesCount() < 5 && $scope.freshEpisodesCount() >= 3) {
+        else if ($scope.episodesRestants() < 5 && $scope.episodesRestants() >= 3) {
           return 'label-warning';
         }
         else {
@@ -49,8 +49,8 @@
   <header>
     <h1>
       Séries TV préférées de {{data.user}} 
-      <span class="label label-default" ng-class="bientotFini()" ng-hide="freshEpisodesCount() == 0">
-        {{freshEpisodesCount()}}
+      <span class="label label-default" ng-class="bientotFini()" ng-hide="episodesRestants() == 0">
+        {{episodesRestants()}}
       </span>
     </h1>
   </header>
