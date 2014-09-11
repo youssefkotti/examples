@@ -103,7 +103,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="episode in data.episodes | filter:{watched: false} | orderBy:'series'">
+        <tr ng-repeat="episode in data.episodes | episodeVus:afficheEpVus | orderBy:'series'">
           <td>{{episode.series}}</td>
           <td>{{episode.season}}</td>
           <td>{{episode.ep}}</td>
